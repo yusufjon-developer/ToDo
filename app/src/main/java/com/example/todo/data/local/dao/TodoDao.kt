@@ -9,6 +9,9 @@ interface TodoDao {
     @Query("SELECT * FROM todos ORDER BY isCompleted ASC, priority DESC, createdAt DESC")
     fun getTodosPaged(): PagingSource<Int, TodoEntity>
 
+    @Query("SELECT * FROM todos WHERE id = :id")
+    suspend fun getTodoById(id: Int): TodoEntity?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTodo(todo: TodoEntity)
 

@@ -21,6 +21,7 @@ import com.example.todo.presentation.ui.components.TodoItemCard
 @Composable
 fun TodoListScreen(
     onAddClick: () -> Unit,
+    onItemClick: (com.example.todo.domain.model.TodoModel) -> Unit,
     viewModel: TodoListViewModel = hiltViewModel()
 ) {
     val todos = viewModel.todos.collectAsLazyPagingItems()
@@ -61,7 +62,8 @@ fun TodoListScreen(
                     TodoItemCard(
                         todo = todo,
                         onChecked = { viewModel.onTodoChecked(todo) },
-                        onDelete = { viewModel.onDeleteTodo(todo) }
+                        onDelete = { viewModel.onDeleteTodo(todo) },
+                        onClick = { onItemClick(todo) }
                     )
                 }
             }

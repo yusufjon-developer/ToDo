@@ -18,7 +18,8 @@ import com.example.todo.presentation.utils.formatTimestamp
 fun TodoItemCard(
     todo: TodoModel,
     onChecked: (Boolean) -> Unit,
-    onDelete: () -> Unit
+    onDelete: () -> Unit,
+    onClick: () -> Unit
 ) {
     val priority = TodoPriority.fromInt(todo.priority)
 
@@ -31,6 +32,7 @@ fun TodoItemCard(
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(containerColor = cardColor),
         elevation = CardDefaults.cardElevation(if (todo.isCompleted) 0.dp else 2.dp),
+        onClick = onClick,
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(

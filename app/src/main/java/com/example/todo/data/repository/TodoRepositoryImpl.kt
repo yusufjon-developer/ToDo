@@ -30,6 +30,10 @@ class TodoRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getTodoById(id: Int): TodoModel? {
+        return dao.getTodoById(id)?.toDomain()
+    }
+
     override suspend fun insertTodo(todo: TodoModel) {
         dao.insertTodo(todo.toEntity())
     }
