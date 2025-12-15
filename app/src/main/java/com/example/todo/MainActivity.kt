@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.example.todo.presentation.ui.navigation.TodoNavHost
-import com.example.todo.ui.theme.ToDoTheme
+import com.example.todo.presentation.ui.theme.ToDoTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

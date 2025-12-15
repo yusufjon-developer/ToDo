@@ -80,7 +80,7 @@ fun TodoItemCard(
                         color = MaterialTheme.colorScheme.primary
                     )
                 }
-                else {
+                else if (todo.completedAt != null) {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Создано: ${formatTimestamp(todo.createdAt)}",

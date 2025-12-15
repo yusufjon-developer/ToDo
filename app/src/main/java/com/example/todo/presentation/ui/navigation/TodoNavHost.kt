@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.todo.presentation.ui.screens.add.AddTodoScreen
+import com.example.todo.presentation.ui.screens.detail.DetailTodoScreen // Импорт
 import com.example.todo.presentation.ui.screens.edit.EditTodoScreen
 import com.example.todo.presentation.ui.screens.list.TodoListScreen
 
@@ -20,7 +21,7 @@ fun TodoNavHost() {
             TodoListScreen(
                 onAddClick = { navController.navigate("add") },
                 onItemClick = { todo ->
-                    navController.navigate("edit/${todo.id}")
+                    navController.navigate("detail/${todo.id}")
                 }
             )
         }
@@ -32,10 +33,20 @@ fun TodoNavHost() {
         }
 
         composable(
-            route = "edit/{todoId}",
-            arguments = listOf(
-                navArgument("todoId") { type = NavType.IntType }
+            route = "detail/{todoId}",
+            arguments = listOf(navArgument("todoId") { type = NavType.IntType })
+        ) {
+            DetailTodoScreen(
+                onBack = { navController.popBackStack() },
+                onEditClick = { id ->
+                    navController.navigate("edit/$id")
+                }
             )
+        }
+
+        composable(
+            route = "edit/{todoId}",
+            arguments = listOf(navArgument("todoId") { type = NavType.IntType })
         ) {
             EditTodoScreen(
                 onBack = { navController.popBackStack() }
