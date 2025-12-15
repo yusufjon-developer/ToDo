@@ -49,9 +49,14 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
+    val pagingVersion = "3.3.0"
+    implementation("androidx.paging:paging-runtime:$pagingVersion")
+    implementation("androidx.paging:paging-compose:$pagingVersion")
+
     val roomVersion = "2.6.1"
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.room:room-paging:$roomVersion")
     ksp("androidx.room:room-compiler:$roomVersion")
 
     implementation("com.google.dagger:hilt-android:2.51.1")
