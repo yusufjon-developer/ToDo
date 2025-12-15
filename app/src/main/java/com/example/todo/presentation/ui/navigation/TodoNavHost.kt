@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.todo.presentation.ui.screens.add.AddTodoScreen
-import com.example.todo.presentation.ui.screens.detail.DetailTodoScreen // Импорт
+import com.example.todo.presentation.ui.screens.detail.DetailTodoScreen
 import com.example.todo.presentation.ui.screens.edit.EditTodoScreen
 import com.example.todo.presentation.ui.screens.list.TodoListScreen
 
@@ -15,38 +15,47 @@ import com.example.todo.presentation.ui.screens.list.TodoListScreen
 fun TodoNavHost() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "list") {
+    NavHost(
+        navController = navController,
+        startDestination = Screen.List.route
+    ) {
 
-        composable("list") {
+        composable(Screen.List.route) {
             TodoListScreen(
-                onAddClick = { navController.navigate("add") },
+                onAddClick = {
+                    navController.navigate(Screen.Add.route)
+                },
                 onItemClick = { todo ->
-                    navController.navigate("detail/${todo.id}")
+                    navController.navigate(Screen.Detail.createRoute(todo.id))
                 }
             )
         }
 
-        composable("add") {
+        composable(Screen.Add.route) {
             AddTodoScreen(
                 onBack = { navController.popBackStack() }
             )
         }
 
         composable(
-            route = "detail/{todoId}",
-            arguments = listOf(navArgument("todoId") { type = NavType.IntType })
+            route = Screen.Detail.route,
+            arguments = listOf(
+                navArgument(Screen.Detail.ARG_TODO_ID) { type = NavType.IntType }
+            )
         ) {
             DetailTodoScreen(
                 onBack = { navController.popBackStack() },
                 onEditClick = { id ->
-                    navController.navigate("edit/$id")
+                    navController.navigate(Screen.Edit.createRoute(id))
                 }
             )
         }
 
         composable(
-            route = "edit/{todoId}",
-            arguments = listOf(navArgument("todoId") { type = NavType.IntType })
+            route = Screen.Edit.route,
+            arguments = listOf(
+                navArgument(Screen.Edit.ARG_TODO_ID) { type = NavType.IntType }
+            )
         ) {
             EditTodoScreen(
                 onBack = { navController.popBackStack() }
